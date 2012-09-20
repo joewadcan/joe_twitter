@@ -1,0 +1,1 @@
+Joe's Twitter Application! A lesson in Bootstrap, and Rails MVC understanding.
