@@ -2,61 +2,37 @@ require 'spec_helper'
 
 describe "StaticPages" do
   let(:sitetitle) {"Joe Twitter"}
+  subject { page }
+
   describe "Home page" do
-    it "should have the h1 'Joe Twitter'" do
-    	visit '/static_pages/home'
-        page.should have_selector("h1", :text=> "Joe Twitter")
-    end
+    before { visit root_path}
 
-    it "should have the right title " do
-    	visit '/static_pages/home'
-        page.should have_selector("title", :text=> "#{sitetitle}")
-    end
-
-    it "should not have a custom page title" do
-      visit '/static_pages/home'
-      page.should_not have_selector("title", :text => "| Home")
-
-    end
-
+    it { should have_selector("h1", text: 'Joe Twitter') }
+    it { should have_selector("title", text: full_title('')) } 
+    it { should_not have_selector("title", text: "| Home") }
+    
   end
 
   describe "Help page" do
-    it "should have the h1 'Help'" do
-    	visit '/static_pages/help'
-        page.should have_selector('h1', :text=> "Help")
-    end
-
-    it "should have the right title " do
-    	visit '/static_pages/help'
-        page.should have_selector('title', :text=> "#{sitetitle} | Help")
-    end
+    before { visit help_path }
+    it { should have_selector('h1', text: 'Help') }
+    it { should have_selector('title', text: full_title('Help')) } 
+    
   end
 
   describe "About page" do
-    it "should have the h1 'About Us'" do
-    	visit '/static_pages/about'
-        page.should have_selector('h1', :text=> "About Us")
-    end
-
-    it "should have the right title " do
-    	visit '/static_pages/about'
-        page.should have_selector('title', :text=> "#{sitetitle} | About")
-    end
+    before {visit about_path}
+    it { should have_selector('h1', text: 'About Us') }
+    it { should have_selector('title', text: full_title('About Us')) } 
+    
 
   end
 
   describe "Contact page" do
-    it "should have the h1 'Contact Me'" do
-    	visit '/static_pages/contact'
-        page.should have_selector('h1', :text=> "Contact Me")
-    end
+    before { visit contact_path }
 
-    it "should have the right title " do
-    	visit '/static_pages/contact'
-        page.should have_selector('title', :text=> "#{sitetitle} | Contact Me")
-    end
-
+    it { should have_selector('h1',    text: 'Contact Me') }
+    it { should have_selector('title', text: full_title('Contact Me')) }
   end
 
 
