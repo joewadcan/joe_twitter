@@ -22,11 +22,20 @@ describe User do
   it { should respond_to (:password)}
   it { should respond_to (:password_confirmation)}
   it { should respond_to (:authenticate)}
+  it { should respond_to (:remember_token)}
+  
   it { should be_valid }
   
   describe "When name isn't present" do
   	before { @user.name = " " }
   	it { should_not be_valid }
+  end
+
+  #Session generator ***************
+
+  describe "remember token" do
+    before { @user.save }
+    its(:remember_token) { should_not be_blank }
   end
 
   #PASSWORD STUFF *********************************************************
@@ -69,6 +78,7 @@ describe User do
   	end
   end
 
+  
   #End password stuff *********************************************************
 
 #EMAIL STUFF *********************************************************
