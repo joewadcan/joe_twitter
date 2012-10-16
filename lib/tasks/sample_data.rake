@@ -12,6 +12,18 @@ namespace :db do
 			password = "password"
 			User.create!(name: name, email: email, password: password, password_confirmation: password )
 		end
+	
+		users = User.all(limit:6)   #make some posts
+		50.times do
+			content = Faker::Lorem.sentence(5) #5 words
+			users.each { |user| user.microposts.create!(content: content) }  #use create! so it raises an exception if there's a problem.				
+		end
 	end
+
+
+
+
+	
+	
 	
 end
